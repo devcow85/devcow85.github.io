@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en-US' }}">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+    
+        <!-- Tailwind CSS CDN -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+	</head>
+	<body>
+        {% include site-nav.html %}
+
+    <main class="container mx-auto min-h-screen items-center px-5 mt-20 flex-grow">
+      {{ content }}
+    </main>
+    {% include site-footer.html %}
+		<!-- <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:400,400i,700|Neuton:400,700" rel="stylesheet"> -->
+	</body>
+</html>

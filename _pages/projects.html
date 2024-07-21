@@ -1,0 +1,53 @@
+---
+layout: default
+title: Projects
+---
+
+<div class="container mx-auto px-6 py-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for project in site.data.projects %}
+        <div class="bg-white p-4 rounded-lg shadow-lg flex cursor-pointer" onclick="openModal('{{ project.title }}', '{{ project.organization }}', '{{ project.period }}', '{{ project.role }}', '{{ project.main_org }}', '{{ project.short_description }}', '{{ project.main_image | default: 'https://via.placeholder.com/150' }}')">
+            <div class="w-1/3 flex-shrink-0">
+                <div class="relative w-full h-0" style="padding-bottom: 100%;">
+                    <img src="{{ project.main_image | default: 'https://via.placeholder.com/150' }}" alt="{{ project.title }}" class="absolute top-0 left-0 w-full h-full object-cover rounded-lg">
+                </div>
+            </div>
+            <div class="w-2/3 pl-4 flex flex-col justify-start">
+                <h3 class="text-lg font-bold mb-2">{{ project.title | truncatewords: 5 }}</h3>
+                <p class="flex-grow">{{ project.short_description | truncatewords: 20 }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- 모달 -->
+<div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex justify-center items-center">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full">
+        <h3 id="modal-title" class="text-xl font-bold mb-4">프로젝트 제목</h3>
+        <img id="modal-image" src="" alt="프로젝트 이미지" class="w-full h-auto object-cover rounded-lg mb-4">
+        <p id="modal-organization" class="mb-2">기관</p>
+        <p id="modal-period" class="mb-2">기간</p>
+        <p id="modal-role" class="mb-2">역할</p>
+        <p id="modal-main_org" class="mb-2">주관기관</p>
+        <p id="modal-content">프로젝트 내용</p>
+        <button onclick="closeModal()" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">닫기</button>
+    </div>
+</div>
+
+<script>
+    function openModal(title, organization, period, role, main_org, content, image) {
+        document.getElementById('modal-title').innerText = title;
+        document.getElementById('modal-image').src = image;
+        document.getElementById('modal-organization').innerText = "기관: " + organization;
+        document.getElementById('modal-period').innerText = "기간: " + period;
+        document.getElementById('modal-role').innerText = "역할: " + role;
+        document.getElementById('modal-main_org').innerText = "주관기관: " + main_org;
+        document.getElementById('modal-content').innerText = content;
+        document.getElementById('modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+        document.getElementById('modal').classList.add('hidden');
+    }
+</script>

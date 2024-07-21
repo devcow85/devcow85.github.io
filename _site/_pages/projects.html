@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+    
+        <!-- Tailwind CSS CDN -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+	</head>
+	<body>
+        <nav id="navbar" class="bg-yellow-500 fixed w-full z-20 top-0 start-0">
+    <div class="container mx-auto px-6 py-3 flex flex-wrap items-center justify-between">
+        <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+            <img src="/assets/images/cow_face_cleaned_edges_v3.svg" alt="Cow Icon" class="w-6 h-6">
+            <span id="site-title" class="bg-transparent self-center text-2xl font-semibold whitespace-nowrap">Devcow85@</span>
+        </a>
+        <button id="hamburger-btn", data-collapse-toggle="navbar-solid-bg" type="button" class="inline-flex items-center p-2 w-8 h-8 hover:text-purple-900 justify-center rounded-lg md:hidden" aria-controls="navbar-solid-bg" aria-expanded="false">
+            <i id="menu-icon" class="fas fa-bars"></i>
+        </button>
+        <div class="hidden w-full md:block md:w-auto" id="navbar-solid-bg">
+            <ul class="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
+                
+                    <li>
+                    <a class="block py-2 px-3 md:p-0 rounded md:border-0 hover:text-purple-900" href="/" >Blog</a>
+                    </li>
+                
+                    <li>
+                    <a class="block py-2 px-3 md:p-0 rounded md:border-0 hover:text-purple-900" href="/_pages/projects.html" class="current">Projects</a>
+                    </li>
+                
+                    <li>
+                    <a class="block py-2 px-3 md:p-0 rounded md:border-0 hover:text-purple-900" href="/_pages/publifications.html" >Publifications</a>
+                    </li>
+                
+                    <li>
+                    <a class="block py-2 px-3 md:p-0 rounded md:border-0 hover:text-purple-900" href="/_pages/about.html" >About</a>
+                    </li>
+                
+                <li>
+                <span class="block py-2 px-3 md:p-0 rounded hover:text-purple-900 md:border-0 "> <button id="theme-toggle" class="rounded-lg md:block"> <i id="theme-icon" class="fas fa-moon"></i> </button> </span>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var navItems = document.querySelectorAll('#navbar-solid-bg ul li a');
+        var currentPage = window.location.pathname;
+
+        navItems.forEach(function(item) {
+            if (item.getAttribute('href') === currentPage) {
+                item.classList.add('current');
+            }
+        });
+
+        var hamburgerButton = document.getElementById('hamburger-btn');
+        var navMenu = document.getElementById('navbar-solid-bg');
+
+        hamburgerButton.addEventListener('click', function() {
+            navMenu.classList.toggle('hidden');
+        });
+    });
+
+    var hamburgerButton = document.getElementById('hamburger-btn');
+    var navMenu = document.getElementById('navbar-solid-bg');
+    var menuIcon = document.getElementById('menu-icon');
+
+    hamburgerButton.addEventListener('click', function() {
+        navMenu.classList.toggle('block');
+        if (navMenu.classList.contains('block')) {
+            menuIcon.className ='fas fa-times';
+        } else {
+            menuIcon.className ='fas fa-bars';
+        }
+    });
+
+    var themeToggle = document.getElementById('theme-toggle');
+    var themeIcon = document.getElementById('theme-icon');
+    var body = document.body;
+
+    // 페이지 로드 시 저장된 테마 모드를 적용
+    var savedThemeMode = localStorage.getItem('themeMode');
+    if (savedThemeMode === 'dark') {
+        body.classList.add('dark');
+        themeIcon.className = 'fas fa-sun';
+    }
+
+    themeToggle.addEventListener('click', function() {
+        // 테마 모드 변경
+        body.classList.toggle('dark');
+        if (body.classList.contains('dark')) {
+            themeIcon.className = 'fas fa-sun';
+            // 테마 모드를 localStorage에 저장
+            localStorage.setItem('themeMode', 'dark');
+        } else {
+            themeIcon.className = 'fas fa-moon';
+            // 테마 모드를 localStorage에 저장
+            localStorage.setItem('themeMode', 'light');
+        }
+    });
+
+</script>
+
+    <main class="container mx-auto min-h-screen items-center px-5 mt-20 flex-grow">
+      <div class="container mx-auto px-6 py-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <div class="bg-white p-4 rounded-lg shadow-lg flex cursor-pointer" onclick="openModal('시뮬레이션 기반 고속/고정확도 데이터센터 워크로드/시스템 분석 플랫폼 개발', '', '24.04.01~27.12.31 (24.04.01~27.12.31)', '연구책임자 (주관)', '한국전자기술연구원', '시뮬레이터 기반 최적 transformer 실행을 위한 프로파일링 및 실행 최적화 아키텍처 탐색 알고리즘 개발', 'https://via.placeholder.com/150')">
+            <div class="w-1/3 flex-shrink-0">
+                <div class="relative w-full h-0" style="padding-bottom: 100%;">
+                    <img src="https://via.placeholder.com/150" alt="시뮬레이션 기반 고속/고정확도 데이터센터 워크로드/시스템 분석 플랫폼 개발" class="absolute top-0 left-0 w-full h-full object-cover rounded-lg">
+                </div>
+            </div>
+            <div class="w-2/3 pl-4 flex flex-col justify-start">
+                <h3 class="text-lg font-bold mb-2">시뮬레이션 기반 고속/고정확도 데이터센터 워크로드/시스템...</h3>
+                <p class="flex-grow">시뮬레이터 기반 최적 transformer 실행을 위한 프로파일링 및 실행 최적화 아키텍처 탐색 알고리즘 개발</p>
+            </div>
+        </div>
+        
+        <div class="bg-white p-4 rounded-lg shadow-lg flex cursor-pointer" onclick="openModal('거대인공신경망 처리 PIM-NPU 지원 시스템 SW 기술개발', '', '23.04.01~27.12.31 (23.04.01~27.12.31)', '연구책임자 (공동)', '주식회사 사피온', 'NPU-PIM 이기종 시스템의 프로파일링 성능 분석 기술 및 모니터링 도구 개발', 'https://via.placeholder.com/150')">
+            <div class="w-1/3 flex-shrink-0">
+                <div class="relative w-full h-0" style="padding-bottom: 100%;">
+                    <img src="https://via.placeholder.com/150" alt="거대인공신경망 처리 PIM-NPU 지원 시스템 SW 기술개발" class="absolute top-0 left-0 w-full h-full object-cover rounded-lg">
+                </div>
+            </div>
+            <div class="w-2/3 pl-4 flex flex-col justify-start">
+                <h3 class="text-lg font-bold mb-2">거대인공신경망 처리 PIM-NPU 지원 시스템...</h3>
+                <p class="flex-grow">NPU-PIM 이기종 시스템의 프로파일링 성능 분석 기술 및 모니터링 도구 개발</p>
+            </div>
+        </div>
+        
+        <div class="bg-white p-4 rounded-lg shadow-lg flex cursor-pointer" onclick="openModal('재구성형 PIM 디바이스 기반의 Memory-Centric 아키텍처 개발', '', '22.04.01~28.12.31 (22.04.01~28.12.31)', '연구책임자 (공동)', '고려대학교', '다중 PIM 기반 서버 시스템에서의 LLM 모델 포팅 및 실행 성능 측정 및 PIM SW 연동 프레임워크 개발', 'https://via.placeholder.com/150')">
+            <div class="w-1/3 flex-shrink-0">
+                <div class="relative w-full h-0" style="padding-bottom: 100%;">
+                    <img src="https://via.placeholder.com/150" alt="재구성형 PIM 디바이스 기반의 Memory-Centric 아키텍처 개발" class="absolute top-0 left-0 w-full h-full object-cover rounded-lg">
+                </div>
+            </div>
+            <div class="w-2/3 pl-4 flex flex-col justify-start">
+                <h3 class="text-lg font-bold mb-2">재구성형 PIM 디바이스 기반의 Memory-Centric...</h3>
+                <p class="flex-grow">다중 PIM 기반 서버 시스템에서의 LLM 모델 포팅 및 실행 성능 측정 및 PIM SW 연동 프레임워크 개발</p>
+            </div>
+        </div>
+        
+        <div class="bg-white p-4 rounded-lg shadow-lg flex cursor-pointer" onclick="openModal('고효율 초저전력 경량 엣지 디바이스용 소자회로 및 SoC 개발', '', '20.04.01.~24.06.30 (20.04.01~24.06.30)', '연구자 (주관)', '한국전자기술연구원', '엣지 NPU 기반 분류 및 객체검출 모델의 양자화 기술 및 실행 최적화 기술 개발', 'https://via.placeholder.com/150')">
+            <div class="w-1/3 flex-shrink-0">
+                <div class="relative w-full h-0" style="padding-bottom: 100%;">
+                    <img src="https://via.placeholder.com/150" alt="고효율 초저전력 경량 엣지 디바이스용 소자회로 및 SoC 개발" class="absolute top-0 left-0 w-full h-full object-cover rounded-lg">
+                </div>
+            </div>
+            <div class="w-2/3 pl-4 flex flex-col justify-start">
+                <h3 class="text-lg font-bold mb-2">고효율 초저전력 경량 엣지 디바이스용...</h3>
+                <p class="flex-grow">엣지 NPU 기반 분류 및 객체검출 모델의 양자화 기술 및 실행 최적화 기술 개발</p>
+            </div>
+        </div>
+        
+        <div class="bg-white p-4 rounded-lg shadow-lg flex cursor-pointer" onclick="openModal('FO Package를 이용한 인공지능 3D IC 제조공정 기술', '', '18.04.01~22.12.31 (18.04.01~22.12.31)', '연구자 (공동)', '주식회사 네패스', 'RCE-NN 기반 머신러닝 네트워크 개발 SW 플랫폼 기술 개발 및 , BNN 기술 개발 및 PICE 기반 드라이버 및 CNN 기반 기술 개발, 관련 기술의 기술이전 수행 (3억)', 'https://via.placeholder.com/150')">
+            <div class="w-1/3 flex-shrink-0">
+                <div class="relative w-full h-0" style="padding-bottom: 100%;">
+                    <img src="https://via.placeholder.com/150" alt="FO Package를 이용한 인공지능 3D IC 제조공정 기술" class="absolute top-0 left-0 w-full h-full object-cover rounded-lg">
+                </div>
+            </div>
+            <div class="w-2/3 pl-4 flex flex-col justify-start">
+                <h3 class="text-lg font-bold mb-2">FO Package를 이용한 인공지능 3D...</h3>
+                <p class="flex-grow">RCE-NN 기반 머신러닝 네트워크 개발 SW 플랫폼 기술 개발 및 , BNN 기술 개발 및 PICE 기반 드라이버 및 CNN...</p>
+            </div>
+        </div>
+        
+        <div class="bg-white p-4 rounded-lg shadow-lg flex cursor-pointer" onclick="openModal('스마트 모바일 및 IoT 디바이스를 위한 뉴럴셀(Spiking Neural Cell)기반SNP SoC 원천기술개발', '', '17.04.01~21.12.31 (17.04.01~21.12.31)', '연구자 (공동)', '한국전자기술연구원', 'Spiking Neural Network / TSSL-BP 기반 학습 및 테스트 SW 프레임워크 개발 및 양자화 기술 개발, 관련 응용 기술 개발', 'https://via.placeholder.com/150')">
+            <div class="w-1/3 flex-shrink-0">
+                <div class="relative w-full h-0" style="padding-bottom: 100%;">
+                    <img src="https://via.placeholder.com/150" alt="스마트 모바일 및 IoT 디바이스를 위한 뉴럴셀(Spiking Neural Cell)기반SNP SoC 원천기술개발" class="absolute top-0 left-0 w-full h-full object-cover rounded-lg">
+                </div>
+            </div>
+            <div class="w-2/3 pl-4 flex flex-col justify-start">
+                <h3 class="text-lg font-bold mb-2">스마트 모바일 및 IoT 디바이스를...</h3>
+                <p class="flex-grow">Spiking Neural Network / TSSL-BP 기반 학습 및 테스트 SW 프레임워크 개발 및 양자화 기술 개발, 관련 응용 기술 개발...</p>
+            </div>
+        </div>
+        
+        <div class="bg-white p-4 rounded-lg shadow-lg flex cursor-pointer" onclick="openModal('신경모사 인지형 모바일 컴퓨팅 지능형반도체 기술개발', '', '16.04.01~19.12.31 (18.01.01~19.12.31)', '연구자 (공동)', 'ETRI', 'DNN caffe 기반 분류 및 객체검출 네트워크의 실행 데이터 캡처 및 프로파일링 SW 플랫폼 기술 개발', 'https://via.placeholder.com/150')">
+            <div class="w-1/3 flex-shrink-0">
+                <div class="relative w-full h-0" style="padding-bottom: 100%;">
+                    <img src="https://via.placeholder.com/150" alt="신경모사 인지형 모바일 컴퓨팅 지능형반도체 기술개발" class="absolute top-0 left-0 w-full h-full object-cover rounded-lg">
+                </div>
+            </div>
+            <div class="w-2/3 pl-4 flex flex-col justify-start">
+                <h3 class="text-lg font-bold mb-2">신경모사 인지형 모바일 컴퓨팅 지능형반도체...</h3>
+                <p class="flex-grow">DNN caffe 기반 분류 및 객체검출 네트워크의 실행 데이터 캡처 및 프로파일링 SW 플랫폼 기술 개발</p>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<!-- 모달 -->
+<div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex justify-center items-center">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full">
+        <h3 id="modal-title" class="text-xl font-bold mb-4">프로젝트 제목</h3>
+        <img id="modal-image" src="" alt="프로젝트 이미지" class="w-full h-auto object-cover rounded-lg mb-4">
+        <p id="modal-organization" class="mb-2">기관</p>
+        <p id="modal-period" class="mb-2">기간</p>
+        <p id="modal-role" class="mb-2">역할</p>
+        <p id="modal-main_org" class="mb-2">주관기관</p>
+        <p id="modal-content">프로젝트 내용</p>
+        <button onclick="closeModal()" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">닫기</button>
+    </div>
+</div>
+
+<script>
+    function openModal(title, organization, period, role, main_org, content, image) {
+        document.getElementById('modal-title').innerText = title;
+        document.getElementById('modal-image').src = image;
+        document.getElementById('modal-organization').innerText = "기관: " + organization;
+        document.getElementById('modal-period').innerText = "기간: " + period;
+        document.getElementById('modal-role').innerText = "역할: " + role;
+        document.getElementById('modal-main_org').innerText = "주관기관: " + main_org;
+        document.getElementById('modal-content').innerText = content;
+        document.getElementById('modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+        document.getElementById('modal').classList.add('hidden');
+    }
+</script>
+
+    </main>
+    <footer class="w-full mb-3 mt-10">
+    <div class="flex items-center">
+        <hr class="flex-grow border-t-2">
+        <span class="px-2 text-xs">meobeo</span>
+        <hr class="flex-grow border-t-2">
+      </div>
+    <div class="container mx-auto px-4 py-2">
+        
+        <div class="flex justify-between items-center">
+        <div>
+            <h3 class="text-lg font-bold">Devcow85@</h3>
+            <p class="mt-2 text-sm text-gray-500">&copy;2024 devcow85. All rights reserved.</p>
+        </div>
+        <div>
+            <ul class="flex items-center space-x-4">
+                <li>
+                    <a href="mailto:seokhun.jeon@keti.re.kr" class="text-gray-500 text-sm"><i class="far fa-envelope"></i> Contact</a>
+                </li>
+                <li>
+                    <a href="https://github.com/devcow85" class="text-gray-500 text-sm"><i class="fab fa-github"></i> Github</a>
+                </li>
+            </ul>
+        </div>
+        </div>
+    </div>
+</footer>
+
+		<!-- <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:400,400i,700|Neuton:400,700" rel="stylesheet"> -->
+	</body>
+</html>

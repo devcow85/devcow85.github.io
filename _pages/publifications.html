@@ -1,0 +1,32 @@
+---
+layout: default
+title: publifications
+---
+
+<div class="relative w-full h-32 mb-3">
+    <img class="w-full h-full rounded-lg object-cover" src="{{ site.baseurl }}/assets/images/pub-img.jpg" alt="Profile picture">
+    <div class="absolute inset-0 bg-white bg-opacity-50 rounded-lg"></div>
+    <div class="absolute top-2 left-2 flex items-center text-white text-3xl">
+        <i class="fas fa-terminal text-white mx-2"></i> Publifications
+    </div>
+</div>
+<hr>
+<div>
+    <ul>
+        {% for paper in site.data.pub %}
+            <li class="m-3 hover:text-green-900">
+                <p class="text-xl">{{paper.title}} <a href={{ paper.link }} class="text-sm"><i class="far fa-link"></i></a> </p>
+            </li>
+            
+            <li class ="flex flex-col ml-3">
+                    
+                    <span class="text-sm text-gray-500">{{paper.author}}</span>
+                    <span class="text-sm text-gray-500">{{paper.booktitle}}</span>
+            </li>
+            <li class="ml-3 mb-2 mt-1">
+                <span class="p-1 rounded-lg text-xs text-white bg-green-900"> {{paper.name}}</span>
+            </li>
+            <hr class="w-full mb-1">
+        {% endfor %}
+    </ul>
+</div>

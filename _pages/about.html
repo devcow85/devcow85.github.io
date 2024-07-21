@@ -1,0 +1,150 @@
+---
+layout: default
+title: "CV"
+---
+<div class="bg-white rounded-lg shadow-lg overflow-hidden">
+    <div class="flex flex-col rounded-lg lg:flex-row">
+
+        <!-- Mobile Header -->
+        <div class="flex items-start bg-gray-800 text-white p-8 lg:hidden">
+            <img src="{{ site.baseurl }}/assets/images/main_character.png" alt="Profile Image" class="w-40 h-40 rounded-full mr-4">
+            <div>
+                <h1 class="text-3xl">Seokhun <strong>Jeon</strong></h1>
+                <h2 class="text-xl mb-2">{{site.data.cv.position}}</h2>
+                <div class="text-gray-400">
+                    <p class="text-sm">{{site.data.cv.objectives}}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Left Column -->
+        <div class="w-full lg:w-1/3 bg-gray-800 text-white p-8">
+            <div class="hidden lg:block">
+                <img src="{{ site.baseurl }}/assets/images/main_character.png" alt="Profile Image" class="w-40 h-40 rounded-full mx-auto mb-4">
+            </div>
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold border-b border-gray-400 pb-2 mb-4">Contact</h3>
+                <p class="text-sm">Phone</p>
+                <p class="text-xs text-gray-400 mb-2">{{site.data.cv.personal_information.phone}}</p>
+                <p class="text-sm">Email</p>
+                <p class="text-xs text-gray-400 mb-2">{{site.data.cv.personal_information.email}}</p>
+                <p class="text-sm">Address</p>
+                <p class="text-xs text-gray-400">{{site.data.cv.personal_information.address}}</p>
+            </div>
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold border-b border-gray-400 pb-2 mb-4">Education</h3>
+                {% for edu in site.data.cv.education %}
+                        <div class="mb-4">
+                            <p class="text-xs font-semibold">{{ edu.graduation_date }}</p>
+                            <p class="text-xs text-gray-400"> {{ edu.degree }}</p>
+                            <p class="text-xs text-gray-400">{{ edu.university }} / {{ edu.major }}</p>
+                        </div>
+                {% endfor %}
+            </div>
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold border-b border-gray-400 pb-2 mb-4">Expertise</h3>
+                <ul class="list-disc list-inside text-xs space-y-1">
+                    {% for skill in site.data.cv.skills %}
+                        <li>{{ skill }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold border-b border-gray-400 pb-2 mb-4">Languages</h3>
+                <ul class="list-disc list-inside text-sm">
+                    <li>English</li>
+                    <li>Korean</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="w-full lg:w-2/3 p-8">
+            <!-- Desktop Header -->
+            <div class="hidden lg:block">
+                <h1 class="text-3xl text-gray-800">Seokhun <strong>Jeon</strong></h1>
+                <h2 class="text-xl mb-2 text-gray-800">{{site.data.cv.position}}</h2>
+
+                <div class="rounded-lg bg-gray-200 p-3 mb-5">
+                    <p class="text-sm">{{site.data.cv.objectives}}</p>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <h2 class="text-3xl font-semibold border-b border-gray-400 pb-2 mb-4">Experience</h2>
+                <div class="relative">
+                    <div class="absolute left-6 top-3 h-full w-1 bg-gray-300"></div>
+                    {% for job in site.data.cv.professional_experience %}
+                        <div class="relative mb-4 pl-12">
+                            <div class="absolute left-5 top-3 transform -translate-y-1/2 w-3 h-3 border-2 border-gray-800 rounded-full bg-white"></div>
+                            <p class="font-semibold ml-8">{{ job.dates }}</p>
+                            <p class="text-gray-800 ml-8">{{ job.company }} <span class="text-sm">{{ job.location }}</span></p>
+                            <p class="text-sm font-semibold text-gray-800 ml-8">{{ job.job_title }}</p>
+                            <ul class="list-disc pl-5 text-sm ml-8">
+                                {% for responsibility in job.responsibilities %}
+                                    <li>{{ responsibility }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <div class="mb-4">
+                <h2 class="text-3xl font-semibold border-b border-gray-400 pb-2 mb-4">Projects</h2>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200 rounded-lg overflow-hidden table-fixed">
+                        <thead class="bg-gray-800 text-white text-center">
+                            <tr>
+                                <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">#</th>
+                                <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">Period</th>
+                                <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">Project Name</th>
+                                <th class="px-6 py-3 text-xs font-medium uppercase tracking-wider">Role</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            {% for project in site.data.cv.projects %}
+                                <tr class="cursor-pointer {% cycle 'bg-gray-50', 'bg-gray-200' %}" onclick="toggleDetails('project-{{ forloop.index }}')">
+                                    <td class="px-6 py-4 text-center">{{ forloop.index }}</td>
+                                    <td class="px-6 py-4 whitespace-normal break-words text-center">{{ project.period | replace: ' ', '<br>' }}</td>
+                                    <td class="px-6 py-4 whitespace-normal break-words">{{ project.name }}</td>
+                                    <td class="px-6 py-4 whitespace-normal break-words">{{ project.role }}</td>
+                                </tr>
+                                <tr id="project-{{ forloop.index }}" class="hidden">
+                                    <td colspan="4" class="px-6 py-4 whitespace-normal break-words bg-white">
+                                        <table class="w-full">
+                                            <tr>
+                                                <td class="font-semibold align-top w-32">Agency:</td>
+                                                <td class="break-words">{{ project.agency }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-semibold align-top w-32">Organization:</td>
+                                                <td class="break-words">{{ project.organization }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-semibold align-top w-32">Content:</td>
+                                                <td class="break-words">{{ project.content }}</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div>
+                <h2 class="text-3xl font-semibold border-b border-gray-400 pb-2 mb-4">References</h2>
+                <p class="text-sm">Available upon request.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleDetails(id) {
+        const element = document.getElementById(id);
+        element.classList.toggle('hidden');
+    }
+</script>
