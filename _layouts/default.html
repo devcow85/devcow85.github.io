@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DevPortfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet"> <!-- Lobster 글꼴 불러오기 -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> <!-- Roboto Condensed 글꼴 불러오기 -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .title-font {
+        font-family: 'Lobster', cursive;
+      }
+      body {
+        font-family: 'Roboto', sans-serif;
+        overflow-y: scroll; /* Y축 스크롤 허용 */
+        overflow: -moz-scrollbars-none; /* 파이어폭스에서 스크롤바 숨김 */
+        -ms-overflow-style: none; /* IE에서 스크롤바 숨김 */
+      }
+      body::-webkit-scrollbar {
+        display: none; /* 크롬에서 스크롤바 숨김 */
+      }
+    </style>
+  </head>
+  <body class="h-screen flex items-center justify-center"> <!-- 100% 화면 높이로 설정 -->
+
+    <!-- Container -->
+    <div class="bg-white px-5 pt-5 max-w-screen-md w-full sm:w-3/4 lg:w-2/3 flex flex-col justify-between h-full"> <!-- overflow-hidden으로 스크롤 방지 -->
+      
+      <!-- Title and Navigation -->
+      <div class="text-center mt-5"> <!-- 중앙 정렬을 위한 text-center 적용 -->
+        <!-- Title -->
+        <h1 class="text-4xl mb-4 title-font">
+          <a href="/" class="hover:text-gray-600">DevCow85@</a> <!-- 홈으로 이동 -->
+        </h1>
+
+        <!-- Subtitle as Navigation -->
+        <p class="text-gray-900 text-sm mb-8">
+          <a href="/blog" class="hover:underline">Blog</a> / 
+          <a href="/project" class="hover:underline">Projects</a> / 
+          <a href="/publications" class="hover:underline">Publications</a> /
+          <a href="/gallery" class="hover:underline">Gallery</a>
+        </p>
+      </div>
+
+      <!-- Content -->
+      <div class="flex-grow px-2"> <!-- 콘텐츠가 넘치면 스크롤 가능하게 설정 -->
+        {{content}}
+      </div>
+
+      <!-- Footer -->
+      <footer class="w-full mt-8 text-sm">
+        <div class="py-4 px-2 flex justify-between items-center">
+          <p>&copy; 2024 <span class="mb-2 title-font">DevCow85@</span></p>
+          <div class="flex space-x-4">
+            <!-- Email Icon -->
+            <a href="mailto:{{ site.email }}" class="hover:text-gray-600">
+              <i class="fas fa-envelope fa-lg"></i>
+            </a>
+            <!-- GitHub Icon -->
+            <a href="https://github.com/{{ site.github_username }}" class="hover:text-gray-600">
+              <i class="fab fa-github fa-lg"></i>
+            </a>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+
+  </body>
+</html>

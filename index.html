@@ -1,0 +1,86 @@
+---
+layout: default
+title: Home
+pagination: true
+---
+
+<div class="px-4">
+  <!-- Section Header -->
+  <div class="max-w-7xl mt-[1rem] mx-auto">
+    <div class="lg:text-center">
+      <p class="text-2xl font-semibold">Through My Thoughts and Lens</p>
+      <p class="mt-3 max-w-2xl text-m text-gray-600 lg:mx-auto">
+        Welcome to my personal site where I share my work and insights. I am currently involved in researching algorithms and software related to <span class="font-semibold text-black">AI</span> and <span class="font-semibold text-black">Quantum Computing</span>.
+      </p>
+    </div>
+  </div>
+
+  <!-- Quote Section -->
+  <div class="mt-[5rem] max-w-4xl mx-auto text-left"> <!-- 좌측 정렬을 위해 text-left 추가 -->
+    <blockquote class="border-l-4 border-gray-400 pl-4 text-m italic text-gray-700"> <!-- 수직줄 추가 -->
+      "Here, you'll find a collection of my work, projects, and even a glimpse into my daily life. I hope the information shared here proves to be helpful and insightful to you!"
+    </blockquote>
+    <div class="pl-4 mt-3 flex text-sm items-center">
+      <img class="w-12 h-12 rounded-full" src="/assets/img/mymy.png" alt="Profile picture">
+      <div class="ml-3">
+        <p class="text-gray-900 font-semibold">DevCow85@</p>
+        <p class="text-gray-600">@devcow85</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Blog, Projects, Gallery Sections with Icons -->
+  <div class="mt-[5rem] max-w-7xl mx-auto">
+    <div class="lg:grid lg:grid-cols-3 lg:gap-8 lg:items-start">
+      <!-- Blog Section -->
+      <div class="relative">
+        <div class="absolute flex items-center justify-center h-12 w-12 rounded-md border">
+          <!-- Blog Icon -->
+          <i class="fab fa-blogger-b"></i>
+        </div>
+        <a href="/blog" class="ml-16 block text-m leading-6 font-medium text-gray-900 hover:underline">Blog</a>
+        <p class="ml-16 text-sm text-gray-500">Explore my thoughts on technology, research updates, and more.</p>
+      </div>
+
+      <!-- Projects Section -->
+      <div class="relative mt-7 lg:mt-0">
+        <div class="absolute flex items-center justify-center h-12 w-12 rounded-md border">
+          <!-- Projects Icon -->
+          <i class="fas fa-rocket"></i>
+        </div>
+        <a href="/project" class="ml-16 block text-m leading-6 font-medium text-gray-900 hover:underline">Projects</a>
+        <p class="ml-16 text-sm text-gray-500">Discover the cutting-edge projects I'm currently working on.</p>
+      </div>
+
+      <!-- Gallery Section -->
+      <div class="relative mt-7 lg:mt-0">
+        <div class="absolute flex items-center justify-center h-12 w-12 rounded-md border">
+          <!-- Gallery Icon -->
+          <i class="fas fa-image"></i>
+        </div>
+        <a href="/gallery" class="ml-16 block text-m leading-6 font-medium text-gray-900 hover:underline">Gallery</a>
+        <p class="ml-16 text-sm text-gray-500">A visual journey through my work and life.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-16 max-w-7xl mx-auto bg-gray-100 rounded-lg p-7 relative overflow-hidden">
+    <!-- 사선 패턴 배경 설정 -->
+    <div class="absolute inset-0 bg-gray-100" style="background-image: repeating-linear-gradient(135deg, #ffffff 0px, #000000 5px, #ffffff 5px, #000000 10px); opacity: 0.5;"></div>
+  
+    <!-- 배경 위 투명도 및 내용 영역 -->
+    <div class="absolute inset-0 bg-white opacity-90"></div>
+  
+    <!-- 컨텐츠 섹션 -->
+    <div class="relative z-10 text-left">
+      <p class="text-2xl font-bold text-gray-900 mb-4">Want to explore my journey?</p>
+      <p class="text-m text-gray-700 mb-6">Take a look at my CV to learn about my skills and experience.</p>
+  
+      <!-- 이력서 버튼 -->
+      <a href="/about" class="inline-flex items-left px-4 py-2 bg-gray-600 text-white text-sm font-medium rounded-lg hover:bg-blue-500 transition duration-300">
+        Read CV
+        <i class="fas fa-external-link-alt pl-2"></i>
+      </a>
+    </div>
+  </div>
+</div>

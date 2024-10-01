@@ -1,0 +1,244 @@
+---
+layout: default
+title: About
+---
+
+<div class="px-4 relative">
+    <!-- Floating Side Navigation -->
+    <div id="floatingNav" class="fixed top-1/4 left-2 p-2 space-y-1 block">
+        <a href="#profile" class="nav-link text-gray-600 hover:text-black text-xs block">Profile</a>
+        <a href="#contact" class="nav-link text-gray-600 hover:text-black text-xs block">Contact</a>
+        <a href="#education" class="nav-link text-gray-600 hover:text-black text-xs block">Education</a>
+        <a href="#expertise" class="nav-link text-gray-600 hover:text-black text-xs block">Expertise</a>
+        <a href="#experience" class="nav-link text-gray-600 hover:text-black text-xs block">Experience</a>
+        <a href="#projects" class="nav-link text-gray-600 hover:text-black text-xs block">Projects</a>
+        <a href="#publications" class="nav-link text-gray-600 hover:text-black text-xs block">Publications</a>
+    </div>
+
+    <!-- Section Header -->
+    <div class="max-w-7xl mt-[1rem] mx-auto">
+      <div class="lg:text-center">
+        <p class="text-2xl font-semibold">CV</p>
+      </div>
+    </div>
+
+    <!-- Profile Section -->
+    <div id="profile" class="flex items-center rounded-lg mt-7 p-6 relative overflow-hidden" style="background-image: repeating-linear-gradient(135deg, #777777 0px, #ffffff 3px, #ffffff 3px, #777777 7px);">
+        <!-- Profile Image -->
+        <div class="flex-shrink-0 z-10">
+            <img src="{{ site.baseurl }}/assets/img/mymy.png" alt="Profile Image" class="w-40 h-40 rounded-full mr-6">
+        </div>
+        <!-- Name, Position, Objective -->
+        <div class="flex-grow relative z-10">
+            <h1 class="text-2xl ">Seokhun <strong>Jeon</strong></h1>
+            <h2 class="text-lg mb-2 text-gray-600">{{site.data.cv.position}}</h2>
+            <p class="text-sm text-gray-500">{{site.data.cv.objectives}}</p>
+        </div>
+        <!-- Add a background overlay to make the content more readable -->
+        <div class="absolute inset-0 bg-white opacity-80 z-0"></div>
+    </div>
+
+    <!-- Contact Information -->
+    <div id="contact" class="mt-7 px-6 pt-6 border rounded-lg text-xs">
+        <div class="flex justify-between">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Contact</h3>
+            <i class="far fa-address-card text-xl text-gray-500"></i>
+        </div>
+        <div class="border-t border-gray-200">
+            <dl class="divide-y divide-gray-200">
+                <div class="py-3 flex justify-between">
+                    <dt class="text-gray-800 font-medium">Phone</dt>
+                    <dd class="text-gray-600 pl-7">{{ site.data.cv.personal_information.phone }}</dd>
+                </div>
+                <div class="py-3 flex justify-between">
+                    <dt class="text-gray-800 font-medium">Email</dt>
+                    <dd class="text-gray-600 pl-7">{{ site.data.cv.personal_information.email }}</dd>
+                </div>
+                <div class="py-3 flex justify-between">
+                    <dt class="text-gray-800 font-medium">Address</dt>
+                    <dd class="text-gray-600 break-words pl-7 text-right">{{ site.data.cv.personal_information.address }}</dd>
+                </div>
+            </dl>
+        </div>
+    </div>
+
+    <!-- Education Information -->
+    <div id="education" class="mt-7 px-6 pt-6 border rounded-lg text-xs">
+        <div class="flex justify-between">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Education</h3>
+            <i class="fas fa-graduation-cap text-xl text-gray-500"></i>
+        </div>
+        <div class="border-t border-gray-200">
+            <dl class="divide-y divide-gray-200">
+                {% for edu in site.data.cv.education %}
+                <div class="py-3 flex justify-between">
+                    <dt class="text-gray-800 font-medium">{{ edu.graduation_date }}</dt>
+                    <dd class="text-gray-600 pl-7 text-right"> {{ edu.university }} | {{ edu.major }} <br> {{ edu.degree }}</dd>
+                </div>
+                {% endfor %}
+            </dl>
+        </div>
+    </div>
+
+    <!-- Expertise Section -->
+    <div id="expertise" class="mt-7 px-6 pt-6 border rounded-lg text-xs">
+        <div class="flex justify-between">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Expertise</h3>
+            <i class="fas fa-code text-xl text-gray-500"></i>
+        </div>
+        <div class="border-t border-gray-200">
+            <dl class="divide-y divide-gray-200">
+                {% for skill in site.data.cv.skills %}
+                <div class="py-3 flex justify-between">
+                    <dt class="text-gray-800 font-medium"> </dt>
+                    <dd class="text-gray-600 pl-7">{{skill}} </dd>
+                </div>
+                {% endfor %}
+            </dl>
+        </div>
+    </div>
+
+    <!-- Experience Section -->
+    <div id="experience" class="mt-7 p-6 border rounded-lg text-xs">
+        <div class="flex justify-between">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Experience</h3>
+            <i class="fas fa-network-wired text-xl text-gray-500"></i>
+        </div>
+        <ol class="relative border-s border-gray-300">   
+            {% for job in site.data.cv.professional_experience %}               
+            <li class="mb-7 ms-4">
+                <div class="absolute w-3 h-4 bg-gray-200 rounded-full mt-1 -start-1.5 border border-white"></div>
+                <time class="mb-1 text-sm leading-none text-gray-400">{{ job.dates }}</time>
+                <h3 class="text-sm font-semibold text-gray-900">{{ job.company }} | {{ job.job_title }}</h3>
+                <p class="mb-2 text-sm text-gray-500">{{ job.location }}</p>
+                <ul class="list-disc pl-5 text-sm ml-8">
+                    {% for responsibility in job.responsibilities %}
+                        <li>{{ responsibility }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+
+    <!-- Projects Section -->
+    <div id="projects" class="mt-7 p-6 border rounded-lg text-xs">
+        <div class="flex justify-between">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Projects</h3>
+            <i class="fas fa-rocket text-xl text-gray-500"></i>
+        </div>
+        <div class="border-t border-gray-200">
+            <dl class="divide-y divide-gray-200">
+                {% for project in site.data.projects %}
+                <div class="grid grid-cols-[1fr_3fr_1fr_1fr] gap-4 py-2">
+                    <dt class="text-gray-800 font-medium">
+                        <!-- 괄호 안의 참여 기간 추출 -->
+                        {% assign participation_period = project.period | split: "(" %}
+                        {{ participation_period[1] | remove: ")" | replace: "~", "<br>~"}}
+                    </dt>
+                    <dd class="text-gray-600">{{ project.title }} <br> {{ project.orginization }}</dd>
+                    <dd class=""> {{project.main_org}}</dd>
+                    <dd class=""> {{project.role}}</dd>
+                </div>
+                {% endfor %}
+            </dl>
+        </div>
+    </div>
+
+    <!-- Publication Section -->
+    <div id="publications" class="mt-7 p-6 border rounded-lg text-xs">
+        <div class="flex justify-between">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Publications</h3>
+            <i class="fas fa-certificate text-xl text-gray-500"></i>
+        </div>
+        <div class="border-t border-gray-200">
+            <dl class="divide-y divide-gray-200">
+                {% for pub in site.data.pub_info %}
+                <div class="grid grid-cols-[1fr_3fr_1fr] gap-4 py-2">
+                    <dt class="text-gray-800 font-medium">
+                        {{pub.name}}
+                    </dt>
+                    <dd class="text-gray-600">{{ pub.title }} <br> {{ pub.author }}</dd>
+                    <dd class=""> {{pub.pages}}</dd>
+                </div>
+                {% endfor %}
+            </dl>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript for floating navigation behavior -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const sections = document.querySelectorAll('div[id]');
+    const navLinks = document.querySelectorAll('#floatingNav .nav-link');
+    const floatingNav = document.getElementById('floatingNav');
+    const offset = 100; // 옵셋 값 설정
+
+    // Function to activate the nav link when the section is in view
+    function activateNavLink() {
+      let index = sections.length;
+
+      while (--index && window.scrollY + offset < sections[index].offsetTop) {}
+      
+      navLinks.forEach((link) => link.classList.remove('font-bold'));
+      if (index >= 1) {
+        navLinks[index-1].classList.add('font-bold');
+      }
+    }
+
+    // Smooth scrolling to handle offset when clicking on nav links
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href').substring(1);
+          const targetElement = document.getElementById(targetId);
+  
+          window.scrollTo({
+            top: targetElement.offsetTop - offset,
+            behavior: 'smooth'
+          });
+        });
+      });
+
+    // Make the floating nav follow the scroll smoothly
+    function smoothFollow() {
+      const scrollTop = window.scrollY;
+      const targetTop = Math.max(scrollTop + window.innerHeight / 4, 150);
+      floatingNav.style.transform = `translateY(${targetTop}px)`;
+    }
+
+    // Initial Activation
+    activateNavLink();
+    smoothFollow();
+
+    // Event listeners
+    window.addEventListener('scroll', () => {
+      activateNavLink();
+      smoothFollow();
+    });
+  });
+</script>
+
+<!-- Add custom CSS for hover effect and positioning -->
+<style>
+  /* Floating navigation styling */
+  #floatingNav {
+    left: -7rem; /* Fixed position to the left of the screen */
+    top: -14rem; /* Start at the top 10% of the viewport */
+    position: absolute;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  #floatingNav a:hover {
+    font-weight: bold;
+  }
+
+  #floatingNav a.font-bold {
+    font-weight: bold;
+    color: black;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+</style>

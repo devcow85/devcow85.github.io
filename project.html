@@ -1,0 +1,185 @@
+---
+layout: default
+title: Projects
+---
+
+<div class="px-4">
+    <!-- Section Header -->
+    <div class="max-w-7xl mt-[1rem] mx-auto">
+      <div class="lg:text-center">
+        <p class="text-2xl font-semibold">Projects</p>
+      </div>
+    </div>
+
+    <!-- Carousel Container -->
+    <div class="relative w-full max-w-screen-lg mx-auto mt-4 overflow-hidden">
+        <!-- Carousel Items Wrapper -->
+        <div id="carouselItems" class="flex transition-transform duration-500 ease-in-out">
+          <!-- Project Items -->
+          {% for project in site.data.projects %}
+          <div class="flex-shrink-0 w-full p-4 box-border cursor-pointer" onclick="openModal('{{ forloop.index }}')">
+            <div class="rounded-lg p-10 h-full" style="background-image: repeating-linear-gradient(135deg, #f3f4f6 0px, #f3f4f6 3px, #ffffff 3px, #ffffff 7px);">
+              <h3 class="text-xl font-bold mb-4">{{ project.title }}</h3>
+              <p class="text-gray-600">{{ project.short_description }}</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <!-- Previous Arrow (Left) -->
+        <button id="prevBtn" class="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 text-gray-500 hover:text-gray-800 p-2 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        <!-- Next Arrow (Right) -->
+        <button id="nextBtn" class="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 text-gray-500 hover:text-gray-800 p-2 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+
+        <!-- Slider Indicators (Inside the Container) -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-10">
+            {% for project in site.data.projects %}
+            <button type="button" class="indicator w-3 h-3 rounded-full bg-gray-500" aria-current="false" aria-label="Slide {{ forloop.index }}" data-carousel-slide-to="{{ forloop.index }}"></button>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="fixed inset-0 bg-gray-900 bg-opacity-70 hidden flex items-center justify-center z-20">
+      <div id="modalContent" class="bg-white rounded-lg p-8 max-w-md w-full relative">
+        <button class="absolute top-3 right-4 text-gray-500 hover:text-gray-800" onclick="closeModal()"><i class="fa fa-close"></i></button>
+        <h3 id="modalTitle" class="text-xl font-bold mb-4"></h3>
+        <dl class="divide-y divide-gray-200">
+            <div class="py-2 grid grid-cols-3 gap-4">
+                <dt class="text-sm font-semibold text-gray-700">Organization</dt>
+                <dd id="modalOrg" class="col-span-2 text-sm text-gray-600"></dd>
+            </div>
+            <div class="py-2 grid grid-cols-3 gap-4">
+                <dt class="text-sm font-semibold text-gray-700">Period</dt>
+                <dd id="modalPeriod" class="col-span-2 text-sm text-gray-600"></dd>
+            </div>
+            <div class="py-2 grid grid-cols-3 gap-4">
+                <dt class="text-sm font-semibold text-gray-700">Role</dt>
+                <dd id="modalRole" class="col-span-2 text-sm text-gray-600"></dd>
+            </div>
+            <div class="py-2 grid grid-cols-3 gap-4">
+                <dt class="text-sm font-semibold text-gray-700">Main Organization</dt>
+                <dd id="modalMainOrg" class="col-span-2 text-sm text-gray-600"></dd>
+            </div>
+            <div class="py-2 grid grid-cols-3 gap-4">
+                <dt class="text-sm font-semibold text-gray-700">Description</dt>
+                <dd id="modalDescription" class="col-span-2 text-sm text-gray-600"></dd>
+            </div>
+        </dl>
+        <p id="modalKeywords" class="text-gray-600 italic mt-4"></p>
+      </div>
+    </div>
+
+    <div class="bg-white py-12">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+          <h2 class="text-center text-lg font-semibold leading-8 text-gray-900">Trusted by the world’s most innovative teams</h2>
+          <div class="mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
+            <img class="col-span-2 max-h-12 w-full object-contain lg:col-span-1" src="https://tailwindui.com/img/logos/158x48/transistor-logo-gray-900.svg" alt="Transistor" width="158" height="48">
+            <img class="col-span-2 max-h-12 w-full object-contain lg:col-span-1" src="https://tailwindui.com/img/logos/158x48/reform-logo-gray-900.svg" alt="Reform" width="158" height="48">
+            <img class="col-span-2 max-h-12 w-full object-contain lg:col-span-1" src="https://tailwindui.com/img/logos/158x48/tuple-logo-gray-900.svg" alt="Tuple" width="158" height="48">
+            <img class="col-span-2 max-h-12 w-full object-contain sm:col-start-2 lg:col-span-1" src="https://tailwindui.com/img/logos/158x48/savvycal-logo-gray-900.svg" alt="SavvyCal" width="158" height="48">
+            <img class="col-span-2 col-start-2 max-h-12 w-full object-contain sm:col-start-auto lg:col-span-1" src="https://tailwindui.com/img/logos/158x48/statamic-logo-gray-900.svg" alt="Statamic" width="158" height="48">
+          </div>
+        </div>
+      </div>
+</div>
+
+<!-- JavaScript for Carousel and Modal -->
+<script>
+    const carouselItems = document.getElementById('carouselItems');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const indicators = document.querySelectorAll('.indicator');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalOrg = document.getElementById('modalOrg');
+    const modalPeriod = document.getElementById('modalPeriod');
+    const modalRole = document.getElementById('modalRole');
+    const modalMainOrg = document.getElementById('modalMainOrg');
+    const modalDescription = document.getElementById('modalDescription');
+    const modalKeywords = document.getElementById('modalKeywords');
+
+    let currentIndex = 0;
+    const totalItems = {{ site.data.projects | size }};
+    let itemWidth;
+
+    // 슬라이드 크기 계산
+    function updateCarouselSize() {
+        const itemElement = document.querySelector('.flex-shrink-0');
+        itemWidth = itemElement.offsetWidth;
+        moveCarousel(currentIndex);
+    }
+
+    // Move the carousel to the given index
+    function moveCarousel(index) {
+        const translateValue = index * itemWidth;
+        carouselItems.style.transform = `translateX(-${translateValue}px)`;
+        updateIndicators(index);
+    }
+
+    // Update Indicators
+    function updateIndicators(index) {
+        indicators.forEach((indicator, i) => {
+            if (i === index) {
+                indicator.classList.remove('bg-gray-300');
+                indicator.classList.add('bg-gray-800');
+            } else {
+                indicator.classList.remove('bg-gray-800');
+                indicator.classList.add('bg-gray-300');
+            }
+        });
+    }
+
+    // Next Button
+    nextBtn.addEventListener('click', () => {
+        if (currentIndex < totalItems - 1) {
+            currentIndex++;
+        } else {
+            currentIndex = 0; // Loop back to the first item
+        }
+        moveCarousel(currentIndex);
+    });
+
+    // Previous Button
+    prevBtn.addEventListener('click', () => {
+        if (currentIndex > 0) {
+            currentIndex--;
+        } else {
+            currentIndex = totalItems - 1; // Loop back to the last item
+        }
+        moveCarousel(currentIndex);
+    });
+
+    // Update the carousel size on window resize
+    window.addEventListener('resize', updateCarouselSize);
+
+    // Initialize carousel size
+    updateCarouselSize();
+
+    // Modal open
+    function openModal(index) {
+        const project = {{ site.data.projects | jsonify }}[index - 1]; // 프로젝트 데이터 가져오기
+        modalTitle.innerText = project.title;
+        modalOrg.innerText = `${project.orginization}`;
+        modalPeriod.innerText = `${project.period}`;
+        modalRole.innerText = `${project.role}`;
+        modalMainOrg.innerText = `${project.main_org}`;
+        modalDescription.innerText = project.short_description;
+        modalKeywords.innerText = project.keywords || '';
+        modalOverlay.classList.remove('hidden'); // 모달 보이기
+    }
+
+    // Modal close
+    function closeModal() {
+        modalOverlay.classList.add('hidden');
+    }
+</script>

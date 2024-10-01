@@ -1,0 +1,6 @@
+- name: Blog
+  link: /_pages/blog.html
+- name: Projects
+  link: /_pages/projects.html
+- name: Publications
+  link: /_pages/publifications.html

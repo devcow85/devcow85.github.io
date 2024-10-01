@@ -1,0 +1,42 @@
+personal_information:
+  name: "Seokhun Jeon"
+  email: "seokhun.jeon@keti.re.kr"
+  phone: "(+82) 10-8511-1125"
+  address: "(13509) 25 Saenari-ro, Bundang-gu, Seongnam-si, Gyeonggi-do, Republic of Korea"
+
+position: SW-HW Co-design / Optimization reseacher
+objectives: "I am focus on the development of new computing architectures, drawing upon my comprehensive understanding of computer theory and algorithmic development expertise."
+
+education:
+  - university: "Soongsil University"
+    degree: "M.S Degree"
+    major: "Electronics Engineering"
+    graduation_date: "Feb, 2012"
+  - university: "Soongsil University"
+    degree: "B.S Degree"
+    major: "Electronics Engineering"
+    graduation_date: "Feb, 2010"
+
+professional_experience:
+  - job_title: "Senior Researcher"
+    company: "Korea Electronics Technology Institute"
+    location: "Seongnam, Republic of Korea"
+    dates: "Dec, 2017 - Present"
+    responsibilities:
+      - "Experience in developing various deep learning algorithms, including convolutional neural networks (CNNs), binary neural networks (BNNs), and spiking neural networks (SNNs), as well as universal quantization technology for NPU devices."
+      - "Experience in software development MLOPS system, including the development of software for data management, learning, inference, evaluation, and profiling. Experience in performance profiling on various server platforms related to LLM. Porting LLM models to new AI accelerators (PIM, NPU, etc.) and performance measurement"
+      - "Experience in developing mathematical quantum computing simulators and porting and performance verification of algorithms for quantum computing"
+  - job_title: "Senior Engineer"
+    company: "Seagate Korea Design Center"
+    location: "Yongin, Republic of Korea"
+    dates: "Apr, 2013 - Mar, 2017"
+    responsibilities:
+      - "Experienced in advanced HDD channel/firmware development, including channel chip evaluation and read-write channel algorithms, as well as HDD implementation techniques"
+      - "Responsibility 2"
+      - "Responsibility 3"
+
+skills:
+  - "Python"
+  - "C/C++"
+  - "HTML & CSS / JavaScript"
+  - "C#/Qt"

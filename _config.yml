@@ -1,0 +1,42 @@
+title: DevCow85@
+email: seokhun.jeon@keti.re.kr
+description: >- # this means to ignore newlines until "baseurl:"
+  Write an awesome description for your new site here. You can edit this
+  line in _config.yml. It will appear in your document head meta (for
+  Google search results) and in your feed.xml site description.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://localhost:4000" # 로컬 서버에서 사용 중일 때
+github_username:  devcow85
+
+markdown: kramdown
+# Build settings
+plugins:
+  - jekyll-feed
+  - jekyll-paginate
+
+paginate: 5  # 한 페이지에 표시할 포스트 수
+paginate_path: "/blog/page:num"  # 페이지네이션 경로 설정
+
+include:
+  - _pages
+  - _images
+
+# Exclude from processing.
+# The following items will not be processed, by default.
+# Any item listed under the `exclude:` key here will be automatically added to
+# the internal "default list".
+#
+# Excluded items can be processed by explicitly listing the directories or
+# their entries' file path in the `include:` list.
+#
+# exclude:
+#   - .sass-cache/
+#   - .jekyll-cache/
+#   - gemfiles/
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules/
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/
