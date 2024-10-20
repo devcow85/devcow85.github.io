@@ -23,15 +23,16 @@ title: About
     </div>
 
     <!-- Profile Section -->
-    <div id="profile" class="flex items-center rounded-lg mt-7 p-6 relative overflow-hidden" style="background-image: repeating-linear-gradient(135deg, #777777 0px, #ffffff 3px, #ffffff 3px, #777777 7px);">
+    <div id="profile" class="flex flex-col md:flex-row items-center rounded-lg mt-7 p-6 relative overflow-hidden" style="background-image: repeating-linear-gradient(135deg, #777777 0px, #ffffff 3px, #ffffff 3px, #777777 7px);">
         <!-- Profile Image -->
-        <div class="flex-shrink-0 z-10">
-            <img src="{{ site.baseurl }}/assets/img/mymy.png" alt="Profile Image" class="w-40 h-40 rounded-full mr-6">
-        </div>
+         <div class="flex-shrink-0 flex flex-row z-10">
+            <img src="{{ site.baseurl }}/assets/img/mymy.png" alt="Profile Image" class="w-32 h-32 sm:w-36 sm:h-36 md:w-38 md:h-38 lg:w-40 lg:h-40 rounded-full md:mr-6">
+         </div>
+        
         <!-- Name, Position, Objective -->
         <div class="flex-grow relative z-10">
-            <h1 class="text-2xl ">Seokhun <strong>Jeon</strong></h1>
-            <h2 class="text-lg mb-2 text-gray-600">{{site.data.cv.position}}</h2>
+            <h1 class="text-2xl text-center pt-2 md:text-left">Seokhun <strong>Jeon</strong></h1>
+            <h2 class="text-lg mb-2 text-gray-600 text-center md:text-left">{{site.data.cv.position}}</h2>
             <p class="text-sm text-gray-500">{{site.data.cv.objectives}}</p>
         </div>
         <!-- Add a background overlay to make the content more readable -->
@@ -154,12 +155,20 @@ title: About
         <div class="border-t border-gray-200">
             <dl class="divide-y divide-gray-200">
                 {% for pub in site.data.pub_info %}
-                <div class="grid grid-cols-[1fr_3fr_1fr] gap-4 py-2">
+                <div class="grid grid-cols-[1fr_3fr_1fr_1fr] gap-4 py-2">
                     <dt class="text-gray-800 font-medium">
-                        {{pub.name}}
+                        {{ pub.name }}
                     </dt>
-                    <dd class="text-gray-600">{{ pub.title }} <br> {{ pub.author }}</dd>
-                    <dd class=""> {{pub.pages}}</dd>
+                    <dd class="text-gray-800">
+                        {{ pub.title }} <br>
+                        <i class="text-gray-500">{{ pub.author }}</i> <br>
+                    </dd>
+                    <dd class="">
+                        {{ pub.pages }}
+                    </dd>
+                    <dd class="">
+                        {{pub.year}}, {{ pub.date }}
+                    </dd>
                 </div>
                 {% endfor %}
             </dl>

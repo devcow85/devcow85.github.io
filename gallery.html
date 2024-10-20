@@ -14,137 +14,149 @@ title: Gallery
       </div>
     </div>
     
-  <!-- 선택된 이미지 (클릭된 이미지가 표시될 곳) -->
-  <div id="selectedImageContainer" class="relative mt-4 mb-8 hidden">
-    <img id="selectedImage" src="" alt="Selected Image" class="w-full h-96 object-cover rounded-lg shadow-md cursor-pointer">
+    <!-- 선택된 이미지 (클릭된 이미지가 표시될 곳) -->
+    <div id="selectedImageContainer" class="relative mt-4 mb-8 hidden">
+        <img id="selectedImage" src="" alt="Selected Image" class="w-full h-96 object-cover rounded-lg shadow-md cursor-pointer">
+        <!-- 좌측 끝에 날짜와 시간 -->
+        <div id="dateDisplay" class="absolute left-4 top-4 text-white font-mono text-sm" style="text-shadow: 1px 1px 2px black;"></div>
+        
+        <!-- 큰 이미지 아래 우측 정렬 아이콘 영역 -->
+        <div id="iconContainer" class="flex justify-end p-4 space-x-4 hidden">
+          <!-- Info Icon -->
+          <div class="relative">
+              <i id="infoIcon" class="fas fa-info-circle text-gray-400 cursor-pointer hover:text-gray-800"></i>
+              <!-- EXIF 정보 표시 (info 호버 시) -->
+              <div id="infoTooltip" class="absolute space-y-1 right-0 bottom-full mb-2 bg-black bg-opacity-50 text-white p-2 rounded-lg hidden text-xs" style="width: 200px;">
+                  <p><i class="fas fa-camera mr-1"></i> <span id="tooltipCameraInfo"></span></p>
+                  <p><i class="fas fa-expand mr-1"></i> <span id="tooltipFocalLength"></span></p>
+                  <p><i class="fas fa-adjust mr-1"></i> <span id="tooltipIsoInfo"></span></p>
+                  <p><i class="fas fa-clock mr-1"></i> <span id="tooltipShutterSpeed"></span></p>
+                  <p><i class="fas fa-circle-notch mr-1"></i> <span id="tooltipApertureInfo"></span></p>
+                  <p><i class="fas fa-calendar-alt mr-1"></i> <span id="tooltipDateInfo"></span></p>
+              </div>
+          </div>
+
+          <!-- Download Icon -->
+          <a id="downloadIcon" href="" download>
+              <i class="far fa-arrow-alt-circle-down text-gray-400 cursor-pointer hover:text-gray-800"></i>
+          </a>
+      </div>
     
-    <!-- EXIF 데이터 오버레이 -->
-    <div id="exifOverlay" class="absolute top-4 left-4 bg-black bg-opacity-50 text-white p-2 rounded-lg hidden">
-      <div class="flex flex-col space-y-1 text-xs"> <!-- 세로 정렬 및 작은 글씨 크기 -->
-        <!-- 카메라 정보 -->
-        <div>
-          <i class="fas fa-camera"></i> <span id="cameraInfo"></span>
-        </div>
-        <!-- 렌즈 정보 -->
-        <div>
-          <i class="fas fa-expand"></i> <span id="focalLength"></span>
-        </div>
-        <!-- ISO 정보 -->
-        <div>
-          <i class="fas fa-adjust"></i> <span id="isoInfo"></span>
-        </div>
-        <!-- 셔터 속도 -->
-        <div>
-          <i class="fas fa-clock"></i> <span id="shutterSpeed"></span>
-        </div>
-        <!-- 조리개 값 -->
-        <div>
-          <i class="fas fa-circle-notch"></i> <span id="apertureInfo"></span>
-        </div>
-        <!-- 촬영 날짜 -->
-        <div>
-          <i class="fas fa-calendar-alt"></i> <span id="dateInfo"></span>
-        </div>
-      </div>
     </div>
-  </div>
 
-  <!-- 나머지 이미지 그리드 -->
-  <div id="remainingImagesGrid" class="hidden mt-4 grid grid-cols-2 md:grid-cols-3 gap-4"></div>
+    <!-- 나머지 이미지 그리드 -->
+    <div id="remainingImagesGrid" class="hidden mt-4 grid grid-cols-2 md:grid-cols-3 gap-4"></div>
 
-  <!-- 전체 이미지 갤러리 그리드 -->
-  <div class="grid mt-4 grid-cols-2 md:grid-cols-3 gap-4" id="imageGrid">
-    {% for file in site.static_files %}
-      {% if file.path contains '_images' %}
-      <div class="relative">
-        <img src="{{ file.path }}" alt="{{ file.basename }}" onclick="selectImage('{{ file.path }}')" class="w-full h-64 object-cover rounded-lg shadow-md cursor-pointer">
-      </div>
-      {% endif %}
-    {% endfor %}
-  </div>
+    <!-- 전체 이미지 갤러리 그리드 -->
+    <div class="grid mt-4 grid-cols-2 md:grid-cols-3 gap-4" id="imageGrid">
+        {% for file in site.static_files %}
+        {% if file.path contains '_images' %}
+        <div class="relative">
+            <img src="{{ file.path }}" alt="{{ file.basename }}" onclick="selectImage('{{ file.path }}', '{{ file.basename }}')" class="w-full h-64 object-cover rounded-lg shadow-md cursor-pointer">
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
 </div>
 
-<!-- JavaScript for Image Selection and EXIF Data Extraction -->
+<!-- JavaScript for Image Selection, EXIF Data Extraction, and Icon Functionality -->
 <script>
     const selectedImageContainer = document.getElementById('selectedImageContainer');
     const selectedImage = document.getElementById('selectedImage');
-    const exifOverlay = document.getElementById('exifOverlay');
     const imageGrid = document.getElementById('imageGrid');
     const remainingImagesGrid = document.getElementById('remainingImagesGrid');
-  
+    const downloadIcon = document.getElementById('downloadIcon');
+    const infoTooltip = document.getElementById('infoTooltip');
+    const infoIcon = document.getElementById('infoIcon');
+    const iconContainer = document.getElementById('iconContainer');
+    const dateDisplay = document.getElementById('dateDisplay');
+
     // 이미지 선택 함수
-    function selectImage(imageSrc) {
-      // 선택된 이미지의 src 업데이트
-      selectedImage.src = imageSrc;
-  
-      // 이미지를 로드한 후 EXIF 데이터를 로드
-      selectedImage.onload = function() {
-        loadExifData(selectedImage); // 새로 로드된 이미지를 넘겨줌
-      };
-  
-      // 이미지 그리드를 숨기고 큰 이미지를 표시
-      imageGrid.classList.add('hidden');
-      remainingImagesGrid.classList.remove('hidden');
-      selectedImageContainer.classList.remove('hidden');
-  
-      // 나머지 이미지를 렌더링
-      renderRemainingImages(imageSrc);
-  
-      // 스크롤을 위로 올림
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
+    function selectImage(imageSrc, imageName) {
+        selectedImage.src = imageSrc;
+        downloadIcon.href = imageSrc; // 다운로드 링크 설정
+
+        // 이미지를 로드한 후 EXIF 데이터를 다시 로드
+        const imgElement = new Image(); // 새로 이미지 객체를 생성
+        imgElement.src = imageSrc; // 선택된 이미지 소스를 할당
+        imgElement.onload = function() {
+            loadExifData(imgElement); // 새로 로드된 이미지를 넘겨줌
+        };
+
+        // 이미지 그리드를 숨기고 큰 이미지를 표시
+        imageGrid.classList.add('hidden');
+        remainingImagesGrid.classList.remove('hidden');
+        selectedImageContainer.classList.remove('hidden');
+        iconContainer.classList.remove('hidden');
+
+        // 나머지 이미지를 렌더링
+        renderRemainingImages(imageSrc);
+
+        // 스크롤을 위로 올림
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     }
-  
+
     // EXIF 데이터 추출 함수
     function loadExifData(imageElement) {
-      exifOverlay.classList.add('hidden'); // 기존 데이터 숨기기
-      EXIF.getData(imageElement, function() {
-        const camera = EXIF.getTag(this, 'Make') + ' ' + EXIF.getTag(this, 'Model');
-        const focalLength = EXIF.getTag(this, 'FocalLength') ? EXIF.getTag(this, 'FocalLength') + 'mm' : 'N/A';
-        const iso = EXIF.getTag(this, 'ISOSpeedRatings') || 'N/A';
-        let shutterSpeed = EXIF.getTag(this, 'ShutterSpeedValue');
-        const aperture = EXIF.getTag(this, 'FNumber') || 'N/A';
-        const dateTime = EXIF.getTag(this, 'DateTimeOriginal') || 'N/A';
-  
-        // 셔터 스피드 소수점 2자리 포맷팅 및 sec 단위 추가
-        if (shutterSpeed) {
-          shutterSpeed = (shutterSpeed).toFixed(2) + ' sec';
-        } else {
-          shutterSpeed = 'N/A';
-        }
-  
-        document.getElementById('cameraInfo').innerText = camera;
-        document.getElementById('focalLength').innerText = focalLength;
-        document.getElementById('isoInfo').innerText = 'ISO ' + iso;
-        document.getElementById('shutterSpeed').innerText = shutterSpeed;
-        document.getElementById('apertureInfo').innerText = aperture;
-        document.getElementById('dateInfo').innerText = dateTime;
-  
-        // EXIF 데이터를 오버레이에 표시
-        exifOverlay.classList.remove('hidden');
-      });
+        EXIF.getData(imageElement, function() {
+            const camera = EXIF.getTag(this, 'Make') + ' ' + EXIF.getTag(this, 'Model');
+            const focalLength = EXIF.getTag(this, 'FocalLength') ? EXIF.getTag(this, 'FocalLength') + 'mm' : 'N/A';
+            const iso = EXIF.getTag(this, 'ISOSpeedRatings') || 'N/A';
+            let shutterSpeed = EXIF.getTag(this, 'ShutterSpeedValue');
+            const aperture = EXIF.getTag(this, 'FNumber') || 'N/A';
+            const dateTime = EXIF.getTag(this, 'DateTimeOriginal') || 'N/A';
+
+            // 셔터 스피드 소수점 2자리 포맷팅 및 sec 단위 추가
+            if (shutterSpeed) {
+                shutterSpeed = (shutterSpeed).toFixed(2) + ' sec';
+            } else {
+                shutterSpeed = 'N/A';
+            }
+
+            // ToolTip에 EXIF 데이터 설정
+            document.getElementById('tooltipCameraInfo').innerText = camera;
+            document.getElementById('tooltipFocalLength').innerText = focalLength;
+            document.getElementById('tooltipIsoInfo').innerText = 'ISO ' + iso;
+            document.getElementById('tooltipShutterSpeed').innerText = shutterSpeed;
+            document.getElementById('tooltipApertureInfo').innerText = aperture;
+            document.getElementById('tooltipDateInfo').innerText = dateTime;
+
+            // 날짜를 좌측 끝에 표시
+            dateDisplay.innerText = dateTime || 'Date Not Available';
+        });
     }
-  
+
     // 나머지 이미지 그리드에 표시
     function renderRemainingImages(excludedImageSrc) {
-      const allImages = Array.from(document.querySelectorAll('#imageGrid img'));
-      const remainingImages = allImages.filter(img => img.src !== excludedImageSrc);
-  
-      remainingImagesGrid.innerHTML = '';
-      remainingImages.forEach(image => {
-        const imageWrapper = document.createElement('div');
-        imageWrapper.className = 'relative';
-        imageWrapper.innerHTML = `<img src="${image.src}" class="w-full h-64 object-cover rounded-lg shadow-md cursor-pointer" onclick="selectImage('${image.src}')">`;
-        remainingImagesGrid.appendChild(imageWrapper);
-      });
+        const allImages = Array.from(document.querySelectorAll('#imageGrid img'));
+        const remainingImages = allImages.filter(img => img.src !== excludedImageSrc);
+
+        remainingImagesGrid.innerHTML = '';
+        remainingImages.forEach(image => {
+            const imageWrapper = document.createElement('div');
+            imageWrapper.className = 'relative';
+            imageWrapper.innerHTML = `<img src="${image.src}" class="w-full h-64 object-cover rounded-lg shadow-md cursor-pointer" onclick="selectImage('${image.src}', '${image.alt}')">`;
+            remainingImagesGrid.appendChild(imageWrapper);
+        });
     }
-  
+
+    // Info 아이콘 호버 시 ToolTip 표시
+    infoIcon.addEventListener('mouseover', () => {
+        infoTooltip.classList.remove('hidden');
+    });
+
+    infoIcon.addEventListener('mouseout', () => {
+        infoTooltip.classList.add('hidden');
+    });
+
     // 큰 이미지를 클릭하면 원래 그리드 상태로 복원
     selectedImage.addEventListener('click', () => {
-      selectedImageContainer.classList.add('hidden');
-      remainingImagesGrid.classList.add('hidden');
-      imageGrid.classList.remove('hidden');
+        selectedImageContainer.classList.add('hidden');
+        remainingImagesGrid.classList.add('hidden');
+        imageGrid.classList.remove('hidden');
+        iconContainer.classList.add('hidden');
     });
-  </script>
+</script>

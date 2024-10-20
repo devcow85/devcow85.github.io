@@ -24,9 +24,14 @@ pagination: true
     </div>
   </div>
 
-  <!-- Top Section: Unique Categories (Tags) -->
-  <div class="max-w-7xl mt-4 mx-auto">
-    <div class="flex flex-wrap text-xs justify-center">
+  <div id="tags" class="mt-7 m-2 p-4 border rounded-lg text-xs">
+    <div class="flex justify-between">
+        <h3 class="text-lg font-bold text-gray-800 mb-4">Tags</h3>
+        <i class="far fa-tag text-xl text-gray-500"></i>
+    </div>
+    <!-- Top Section: Unique Categories (Tags) -->
+  <div class="max-w-7xl mx-auto border-t border-gray-200">
+    <div class="flex mt-3 flex-wrap text-xs justify-center">
       
       <!-- Category Filter Buttons -->
       <button onclick="filterByCategory('all', this)" class="category-btn m-2 px-3 py-1 bg-gray-900 text-white rounded-lg">All</button>
@@ -35,6 +40,8 @@ pagination: true
       {% endfor %}
     </div>
   </div>
+</div>
+  
 
   <!-- Middle Section: Blog List -->
   <div class="max-w-7xl mx-auto px-2 mt-4">
@@ -65,7 +72,7 @@ pagination: true
     <!-- Search Bar -->
     <div class="relative w-1/2">
       <input id="searchInput" onkeyup="filterPosts()" type="text" placeholder="Search posts..."
-        class="w-full px-8 py-1 border border-gray-300 text-sm rounded-lg focus:border-black">
+        class="w-full px-8 py-2 border border-gray-300 text-sm rounded-lg focus:border-black">
       <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
         <i class="fas fa-search text-gray-400"></i>
       </div>

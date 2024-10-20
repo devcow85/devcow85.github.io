@@ -3,26 +3,34 @@ layout: default
 title: "{{ page.title }}"
 ---
 
-<div class="container mx-auto px-4 py-8">
+<div class="container mx-auto px-4 py-5">
+   <!-- Wrapper for Date, Tags, and Back Button -->
+  <div class="flex justify-between items-center mb-3">
+    <!-- Date and Tags (Left-aligned) -->
+    <div class="flex items-center text-gray-600 text-sm">
+      <!-- Date -->
+      <span>{{ page.date | date: "%B %d, %Y" }}</span>
+
+      <!-- Tags -->
+      <div class="flex space-x-2 pl-3">
+        {% for tag in page.categories %}
+          <span class="px-2 py-1 bg-gray-200 text-sm text-gray-700 rounded-full">{{ tag }}</span>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Back to Blog Button (Right-aligned) -->
+    <div>
+      <a href="/blog" class="rounded-lg border p-2 text-sm">
+        <i class="fas fa-arrow-alt-circle-left mr-2"></i>
+        Back to Blog
+      </a>
+    </div>
+  </div>
+
   <!-- Title Section with Back to Blog Button -->
   <div class="flex justify-between items-center mb-4">
     <h1 class="text-3xl font-bold">{{ page.title }}</h1>
-    <a href="/blog" class="rounded-lg border p-2 text-sm">
-      <i class="fas fa-arrow-alt-circle-left mr-2"></i>
-      Back to Blog
-    </a>
-  </div>
-
-  <!-- Date and Tags under the title -->
-  <div class="flex items-center text-gray-600 text-sm mb-8">
-    <span>{{ page.date | date: "%B %d, %Y" }}</span>
-
-    <!-- Tags -->
-    <div class="flex space-x-2 pl-3">
-      {% for tag in page.categories %}
-        <span class="px-2 py-1 bg-gray-200 text-sm text-gray-700 rounded-full">{{ tag }}</span>
-      {% endfor %}
-    </div>
   </div>
 
   <!-- Main Content (Markdown Content) -->
@@ -49,16 +57,24 @@ title: "{{ page.title }}"
 
   <!-- Previous/Next Post Links -->
   <div class="flex justify-between items-center mt-12">
+    <!-- Previous Post (Left-aligned) -->
     {% if page.previous.url %}
-      <a href="{{ page.previous.url }}" class="text-blue-500 hover:underline">
-        &larr; {{ page.previous.title }}
-      </a>
+        <a href="{{ page.previous.url }}" class="rounded-lg border p-2 text-sm">
+            <i class="fas fa-arrow-left mr-2"></i>
+            {{ page.previous.title }}
+        </a>
+    {% else %}
+        <span></span> <!-- Empty span to ensure alignment -->
     {% endif %}
 
+    <!-- Next Post (Right-aligned) -->
     {% if page.next.url %}
-      <a href="{{ page.next.url }}" class="text-blue-500 hover:underline">
-        {{ page.next.title }} &rarr;
-      </a>
+        <a href="{{ page.next.url }}" class="rounded-lg border p-2 text-sm">
+            {{ page.next.title }}
+            <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+    {% else %}
+        <span></span> <!-- Empty span to ensure alignment -->
     {% endif %}
   </div>
 </div>

@@ -32,8 +32,8 @@ professional_experience:
     dates: "Apr, 2013 - Mar, 2017"
     responsibilities:
       - "Experienced in advanced HDD channel/firmware development, including channel chip evaluation and read-write channel algorithms, as well as HDD implementation techniques"
-      - "Responsibility 2"
-      - "Responsibility 3"
+      - "Performing SoC bring-up and factory ramp-up to improve yield for HDD product development"
+      - "Collaborating with the Singapore branch to develop an novel algorithm for Flaw scan (defect detection)"
 
 skills:
   - "Python"
